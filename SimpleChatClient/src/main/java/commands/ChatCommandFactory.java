@@ -11,6 +11,8 @@ public class ChatCommandFactory {
                 return new AddChannel();
             case JOIN_CHANNEL:
                 return new JoinChannel();
+            case LEAVE_CHANNEL:
+                return new LeaveChannel();
             case CHANGE_USERNAME:
                 return new ChangeUsername();
             case UNKNOWN:

@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 public class PublicChannel extends Channel {
     private List<ChatClient> channelClients = new ArrayList<>();
-    static int clientSize;
 
     public PublicChannel(String name) {
         super(name);
@@ -16,8 +15,7 @@ public class PublicChannel extends Channel {
     public void join(ChatClient client) {
         channelClients.add(client);
         System.out.println("New client has joined " + name + " channel");
-        clientSize = channelClients.size();
-        System.out.println("Clients in channel " + name + ": " + clientSize);
+        System.out.println("Clients in channel " + name + ": " + channelClients.size());
     }
 
     @Override

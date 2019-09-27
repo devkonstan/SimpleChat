@@ -46,8 +46,7 @@ public class ChatClientImpl implements ChatClient {
         try {
             clientSocket = new Socket(ip, port);
             output = new PrintWriter(clientSocket.getOutputStream(), true);
-            input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())
-            );
+            input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         } catch (IOException e) {
             throw new IllegalStateException("Could not connect to the server at: " + ip + ":" + port);
         }

@@ -14,7 +14,7 @@ public class Message extends ChatCommand {
         return load(LocalTime.now(), content);
     }
 
-    public static Message load(LocalTime timestamp, String content) { // static method
+    public static Message load(LocalTime timestamp, String content) {
         Message message = new Message();
         message.timestamp = timestamp;
         message.content = content;
@@ -23,6 +23,6 @@ public class Message extends ChatCommand {
 
     @Override
     public String toString() {
-        return timestamp + " " + content;
+        return "["+timestamp+"]" + " " + content;
     }
 }

@@ -14,7 +14,8 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Scanner;
 
-@Getter @Setter
+@Getter
+@Setter
 public class ConsoleInputProvider implements UserInputProvider {
     private Scanner scanner = new Scanner(System.in);
     private String username;
@@ -57,16 +58,16 @@ public class ConsoleInputProvider implements UserInputProvider {
         if (input.trim().isEmpty()) {
             throw new EmptyMessageException();
         } else
-            System.out.printf("%s: %s\n", username, input);
+            System.out.println(username + ": " + input);
 
-        if(isCommand(input)) {
+        if (isCommand(input)) {
             String commandString = input.contains(" ")
                     ? input.split(" ")[0] : input;
 
             SupportedCommands commandType = SupportedCommands.fromString(commandString);
-            ChatCommand command =  chatCommandFactory.create(commandType);
+            ChatCommand command = chatCommandFactory.create(commandType);
 
-            if(input.contains(" ")) {
+            if (input.contains(" ")) {
                 String[] arguments = input.split(" ");
                 JCommander.newBuilder()
                         .addObject(command)
@@ -76,7 +77,7 @@ public class ConsoleInputProvider implements UserInputProvider {
 
             return command;
         }
-        return Message.createNew(input.toString());
+        return Message.createNew(input);
     }
 
     // validation method
@@ -89,10 +90,10 @@ public class ConsoleInputProvider implements UserInputProvider {
     }
 
     public void changeUsername(String username) {
-        if(!isUsernameValid(username)) {
+        if (!isUsernameValid(username)) {
             throw new IllegalArgumentException("Valid username should have " +
                     "a length between " + UserSettings.MIN_USERNAME_LENGTH +
-                    " and " + UserSettings.MAX_USERNAME_LENGTH );
+                    " and " + UserSettings.MAX_USERNAME_LENGTH);
         }
         this.username = username;
         update();

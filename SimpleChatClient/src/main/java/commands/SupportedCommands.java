@@ -4,6 +4,7 @@ public enum  SupportedCommands {
     UNKNOWN(""),
     ADD_CHANNEL("/addchannel"),
     JOIN_CHANNEL("/joinchannel"),
+    LEAVE_CHANNEL("/leavechannel"),
     LOGIN("/login"),
     REGISTER("/register"),
     CHANGE_USERNAME("/changeusername");
