@@ -13,7 +13,7 @@ public class UserServiceImpl implements UserService {
     public void register(String username, String password) {
         Optional<User> foundUser = userRepository.find(username);
         if(foundUser.isPresent()) {
-            throw new IllegalStateException("Users.User with " + username + " already exists!");
+            throw new IllegalStateException("User with " + username + " already exists!");
         }
 
         if(!User.isUsernameValid(username)) {

@@ -44,7 +44,6 @@ public class ChatServerImpl implements ChatServer {
                 channelRepository.findByName(ChannelSettings.DEFAULT_CHANNEL_NAME)
                         .ifPresent(channel -> channel.join(client));
                 System.out.println("New client has joined. Online users: " + onlineUsers.size());
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -72,6 +71,8 @@ public class ChatServerImpl implements ChatServer {
     public void clientDisconnected(ChatClient client) {
         onlineUsers.remove(client);
         System.out.println("Client left the channel. Clients online: " + onlineUsers.size());
+        channelRepository.findByName(ChannelSettings.DEFAULT_CHANNEL_NAME)
+                .ifPresent(channel -> channel.leave(client));
     }
 
 

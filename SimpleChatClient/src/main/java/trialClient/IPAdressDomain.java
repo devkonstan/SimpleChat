@@ -8,8 +8,10 @@ public class IPAdressDomain {
         fullPath = str;
         pathSeparator = sep;
     }
+
     public String extension() {
         int slash = fullPath.lastIndexOf(pathSeparator);
+        System.out.println(slash);
         return fullPath.substring(slash + 1);
     }
 }
