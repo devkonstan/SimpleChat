@@ -1,17 +1,13 @@
 package network;
 
-import com.beust.jcommander.JCommander;
 import commands.ChatCommand;
-import commands.ChatCommandFactory;
 import commands.Message;
-import commands.SupportedCommands;
 import exceptions.EmptyMessageException;
 import lombok.Getter;
 import lombok.Setter;
 import settings.UserSettings;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.Scanner;
 
 @Getter
@@ -20,7 +16,7 @@ public class ConsoleInputProvider implements UserInputProvider {
     private Scanner scanner = new Scanner(System.in);
     private String username;
     private LocalDateTime updatedAt;
-    private ChatCommandFactory chatCommandFactory = new ChatCommandFactory();
+
 
     public String getUsername() {
         return username;
@@ -40,17 +36,6 @@ public class ConsoleInputProvider implements UserInputProvider {
         username = tempUsername;
     }
 
-//    @Override
-//    public String getUserInput() {
-//        String input = scanner.nextLine();
-//
-//        if (input.trim().isEmpty()) {
-//            throw new EmptyMessageException();
-//        } else
-//            return String.format("%s: %s", username, input);
-//
-//    }
-
     @Override
     public ChatCommand getUserInput() {
         String input = scanner.nextLine();
@@ -60,24 +45,7 @@ public class ConsoleInputProvider implements UserInputProvider {
         } else
             System.out.println(username + ": " + input);
 
-        if (isCommand(input)) {
-            String commandString = input.contains(" ")
-                    ? input.split(" ")[0] : input;
-
-            SupportedCommands commandType = SupportedCommands.fromString(commandString);
-            ChatCommand command = chatCommandFactory.create(commandType);
-
-            if (input.contains(" ")) {
-                String[] arguments = input.split(" ");
-                JCommander.newBuilder()
-                        .addObject(command)
-                        .build()
-                        .parse(Arrays.copyOfRange(arguments, 1, arguments.length));
-            }
-
-            return command;
-        }
-        return Message.createNew(input);
+        return Message.createNew(username + ": " + input);
     }
 
     // validation method

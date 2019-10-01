@@ -18,7 +18,6 @@ public class ChatClientImpl implements ChatClient {
 
     private List<DisconnectObserver> disconnectObservers = new ArrayList<>();
 
-//    private String currentChannelName = ChannelSettings.DEFAULT_CHANNEL_NAME;
     private final Channel generalChannel = new InMemoryChannelRepository()
             .findByName(ChannelSettings.DEFAULT_CHANNEL_NAME).get();
 
@@ -88,29 +87,9 @@ public class ChatClientImpl implements ChatClient {
         return clientSocket != null && !clientSocket.isClosed(); // analogically to the ServerImpl
     }
 
-    // TBD
-//    @Override
-//    public void changeCurrentChannel(String channelName) {
-//        if (!channelName.equals(currentChannelName)) {
-//            channelRepository.findByName(channelName)
-//                    .orElseThrow(() -> new IllegalStateException("Channel does not exist"));
-//            currentChannelName = channelName;
-//        }
-//    }
-
-    @Override
-    public String getCurrentChannelName() {
-        return generalChannel.getName();
-    }
-
     @Override
     public void subscribe(DisconnectObserver observer) {
         disconnectObservers.add(observer);
-    }
-
-    @Override
-    public void unsubscribe(DisconnectObserver observer) {
-        disconnectObservers.remove(observer); // opposite to the above
     }
 
     @Override

@@ -10,6 +10,7 @@ import java.time.LocalTime;
 public class Message extends ChatCommand {
     private LocalTime timestamp;
     private String content;
+
     public static Message createNew(String content) {
         return load(LocalTime.now(), content);
     }
